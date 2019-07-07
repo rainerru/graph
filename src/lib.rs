@@ -1,6 +1,10 @@
 //! It's the library!
 
 //use std::io;
+
+extern crate matrix;
+
+use matrix::prelude::*;
 use std::fmt;
 
 pub struct Graph
@@ -11,14 +15,14 @@ pub struct Graph
 
 struct Node
 {
-	id: u32,
+	id: usize,
 	name: String,
 }
 
 struct Edge
 {
-	source: u32,
-	destination: u32,
+	source: usize,
+	destination: usize,
 	cost: f64,
 }
 
@@ -41,6 +45,19 @@ impl Graph
 		let e2: Edge = Edge { source: 1, destination: 2, cost: 0.5 };
 		
 		Graph { nodes: vec![n0,n1,n2], edges: vec![e0,e1,e2] }
+	}
+	
+	fn makeGrid ( &self ) -> matrix::format::Compressed<f64>
+	{
+	
+		let mut matrix = Compressed::zero( (self.nodes.len(),self.nodes.len() ) );
+		
+		for edge in &self.edges
+		{
+			matrix.set((edge.source, edge.destination), edge.cost);
+		}
+		
+		matrix
 	}
 
 }

@@ -5,3 +5,4 @@ authors = ["rainerru <rainerru@stud.sbg.ac.at>"]
 edition = "2018"
 
 [dependencies]
+matrix = "0.22.0"
